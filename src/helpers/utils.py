@@ -5,4 +5,4 @@ class Utils:
         if month in months:
             return months.index(month) + 1
         else:
-            return ''
+            return 0

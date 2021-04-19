@@ -1,0 +1,8 @@
+{
+
+  "rabbit": {
+    "host": "mongodbatlas-sigspay-de.ip4ll.mongodb.net",
+    "port": 27017,
+    "exchange": "game-exchange"
+  }
+}

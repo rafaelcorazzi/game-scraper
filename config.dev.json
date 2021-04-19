@@ -1,8 +1,6 @@
 {
-
   "rabbit": {
-    "host": "mongodbatlas-sigspay-de.ip4ll.mongodb.net",
-    "port": 27017,
+    "host": "amqps://tluxjehs:cNN9r4UmJDz5TYzSx1BTdfn5AFzuLfqY@jellyfish.rmq.cloudamqp.com/tluxjehs",
     "exchange": "game-exchange"
   }
 }

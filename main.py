@@ -1,11 +1,7 @@
-from src.infrasctructure.services.scraper_services import  ScraperServices
+from src.infrasctructure.scheduler.scheduler_job_manager import SchedulerJobManager
+
+if __name__ == '__main__':
+   SchedulerJobManager.start_scraping()
 
 
-s = ScraperServices()
 
-for a in s.list_of_console():
-    print(a.console_plataform_name)
-    jogos = s.list_of_games_by_plataform(a.console_plataform_code)
-    for j in jogos:
-        g = s.game_details(j.link, j.reference_id, a.console_plataform_code)
-        print(g.to_json())

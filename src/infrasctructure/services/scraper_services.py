@@ -10,6 +10,7 @@ from src.domain.console_domain import ConsolePlataform
 from src.domain.console_games_domain import ConsoleGames
 from src.domain.game_domain import Game
 import maya
+import uuid
 
 class ScraperServices:
     @staticmethod
@@ -69,7 +70,7 @@ class ScraperServices:
                     game_list.reference_id = z['href'].split("/")[3]
                     game_list.title = z['title'].strip()
                     game_list.link = z['href']
-                    glst.append(game_list)
+                    glst.append(game_list.to_json())
         return glst
 
     @staticmethod
@@ -88,6 +89,7 @@ class ScraperServices:
                     console: ConsolePlataform = ConsolePlataform()
                     console.console_plataform_name = b.select_one('a').text.strip()
                     console.console_plataform_code = b.select_one('a').text.strip().replace(' ', '-').lower()
-                    plt.append(console)
+                    console.console_uuid = str(uuid.uuid5(uuid.NAMESPACE_URL, b.select_one('a').text.strip().replace(' ', '-').lower()))
+                    plt.append(console.to_json())
 
         return plt

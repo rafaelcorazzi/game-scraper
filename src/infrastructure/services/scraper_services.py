@@ -44,9 +44,11 @@ class ScraperServices:
         if release_month > 0 and release_day > 0:
             release_date = maya.parse(f'{release_year}-{release_month}-{release_day}').datetime()
 
+        game_uuid = f'{reference_id} - {title} - {owner} - {publisher} - {release_year}'
+        game_detail.game_id = str(uuid.uuid5(uuid.NAMESPACE_URL, game_uuid))
         game_detail.reference_id = reference_id
         game_detail.title = title
-        game_detail.console_code = console_code
+        game_detail.console_code = str(uuid.uuid5(uuid.NAMESPACE_URL, console_code))
         game_detail.release_date = release_date
         game_detail.release_year = release_year
         game_detail.cover_image = base64.b64encode(requests.get(f"https://jogorama.com.br/thumbr.php?l=180&a=400&img=capas/{reference_id}.jpg").content)
@@ -68,8 +70,9 @@ class ScraperServices:
                     game_list: ConsoleGames = ConsoleGames()
                     game_list.console_code = console_code
                     game_list.reference_id = z['href'].split("/")[3]
-                    game_list.title = z['title'].strip()
+                    game_list.title = z['title'].strip().replace("'", " ")
                     game_list.link = z['href']
+                    #print(game_list.to_json())
                     glst.append(game_list.to_json())
         return glst
 
@@ -79,7 +82,7 @@ class ScraperServices:
         page = ScraperServices.__html_result('https://jogorama.com.br/')
         rows = page.select('.menu')
         plt = []
-
+        clt = []
         i = 0
         for a in rows:
             i += 1
@@ -90,6 +93,7 @@ class ScraperServices:
                     console.console_plataform_name = b.select_one('a').text.strip()
                     console.console_plataform_code = b.select_one('a').text.strip().replace(' ', '-').lower()
                     console.console_uuid = str(uuid.uuid5(uuid.NAMESPACE_URL, b.select_one('a').text.strip().replace(' ', '-').lower()))
+                    clt.append(console)
                     plt.append(console.to_json())
 
-        return plt
+        return clt, plt

@@ -3,7 +3,8 @@ from datetime import datetime
 
 
 class Game(BaseDomain):
-    def __init__(self, console_code: str = None,
+    def __init__(self, game_id: str = None,
+                 console_code: str = None,
                  reference_id: str = None,
                  cover_image: str = None,
                  title: str = None,
@@ -13,15 +14,17 @@ class Game(BaseDomain):
                  publisher: str = None,
                  owner: str = None):
 
+        self.game_id = game_id
         self.console_code = console_code
         self.reference_id = reference_id
-        self.title = title
-        self.genre = genre
-        self.release_year = release_year
         self.cover_image = cover_image
+        self.title = title
+        self.release_date = release_date
+        self.release_year = release_year
+        self.genre = genre
         self.publisher = publisher
         self.owner = owner
-        self.release_date = release_date
+
 
     @staticmethod
     def mapper(data):

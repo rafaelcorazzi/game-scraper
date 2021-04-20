@@ -1,6 +1,6 @@
 {
   "rabbit": {
-    "host": "amqps://tluxjehs:cNN9r4UmJDz5TYzSx1BTdfn5AFzuLfqY@jellyfish.rmq.cloudamqp.com/tluxjehs",
+    "host": "amqp://guest:guest@localhost:5672/",
     "exchange": "game-exchange"
   }
 }

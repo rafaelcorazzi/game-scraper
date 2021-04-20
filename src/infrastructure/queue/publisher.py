@@ -18,8 +18,9 @@ class Publisher:
         # verifies that it is of the correct and expected class.
         channel.exchange_declare(exchange=configs['rabbit']['exchange'], exchange_type='topic')
         # Publishes message to the exchange with the given routing key
+
         channel.basic_publish(exchange=configs['rabbit']['exchange'], routing_key=routing_key,
-                              body=message)
+                              body=message.replace("'", '"'))
         # Create new connection
         # print("[x] Sent message %r for %r" % (message,routing_key))
 
